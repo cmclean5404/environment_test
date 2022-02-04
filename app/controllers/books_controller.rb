@@ -48,9 +48,13 @@ class BooksController < ApplicationController
   end
 
   # DELETE /books/1 or /books/1.json
+  def delete
+	set_book
+  end
+  
   def destroy
-    @book.destroy
-
+	@book.destroy
+	
     respond_to do |format|
       format.html { redirect_to books_url, notice: "Book was successfully destroyed." }
       format.json { head :no_content }
@@ -65,6 +69,6 @@ class BooksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def book_params
-      params.require(:book).permit(:title)
+      params.require(:book).permit(:title, :author, :price, :date)
     end
 end
